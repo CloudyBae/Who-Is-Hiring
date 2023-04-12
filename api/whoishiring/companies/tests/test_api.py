@@ -9,7 +9,6 @@ pytestmark = pytest.mark.django_db
 
 # -----------------Test Get Companies-----------------------
 
-
 def test_zero_companies_should_return_empty_list(client) -> None:
     response = client.get(companies_url)
     assert response.status_code == 200
@@ -28,7 +27,6 @@ def test_one_company_exists_should_succeed(client) -> None:
 
 
 # -----------------Test Post Companies-----------------------
-
 
 def test_create_company_without_arguments_should_fail(client) -> None:
     response = client.post(path=companies_url)
