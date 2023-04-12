@@ -51,4 +51,31 @@ class TestPostCompanies(BasicCompanyApiTestCase):
       )
 
     def test_create_company_with_only_name_all_fields_should_be_default(self)->None:
-        pass
+        response = self.client.post(path=self.companies_url, data={"name":"test company name"})
+        self.assertEqual(response.status_code, 201)
+        response_content = json.loads(response.content)
+        self.assertEqual(response_content.get("name"), "test company name")
+        self.assertEqual(response_content.get("status"), "Hiring")
+        self.assertEqual(response_content.get("application_link"), "")
+        self.assertEqual(response_content.get("notes"), "")
+
+    def test_create_company_with_layoffs_status_should_succeed(self)->None:
+        response = self.client.post(path=self.companies_url, data={"name":"test company name", "status":"Layoffs"})
+        self.assertEqual(response.status_code, 201)
+        response_content = json.loads(response.content)
+        self.assertEqual(response_content.get("status"), "Layoffs")
+
+    def test_create_company_with_wrong_status_should_fail(self)->None:
+        response = self.client.post(path=self.companies_url, data={"name": "test company name", "status": "WrongStatus"})
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("WrongStatus", str(response.content))
+
+    @pytest.mark.xfail
+    def test_should_be_ok_if_fails(self)->None:
+        self.assertEqual(1, 2)
+
+    @pytest.mark.skip
+    def test_should_be_skipped(self) -> None:
+        self.assertEqual(1, 2)
+
+
