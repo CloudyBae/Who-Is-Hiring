@@ -23,7 +23,6 @@ jobs:
           pip install flake8
           pip install -r requirements.txt
       - name: Test with pytest
-        working-directory: ./api/whoishiring
         run: |
           pytest api/whoishiring -s -v --durations=0
           flake8 .
