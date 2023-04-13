@@ -30,6 +30,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         python -m pip install --user virtualenv
         python -m venv env
+        pip install djangorestframework
         pip install pytest
         export PYTHONPATH=$PYTHONPATH:$PYTHONPATH/api/whoishiring
         export DJANGO_SETTINGS_MODULE="whoishiring.settings"
