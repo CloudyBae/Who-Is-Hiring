@@ -1,5 +1,3 @@
 django
 pytest
 pytest-django
-export PYTHONPATH=$PYTHONPATH:$PYTHONPATH/api/whoishiring
-export DJANGO_SETTINGS_MODULE="whoishiring.settings"
