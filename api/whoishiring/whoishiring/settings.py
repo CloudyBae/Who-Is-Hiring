@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.contenttypes",
     "rest_framework",
     "api.whoishiring.companies",
+    "api.whoishiring.companies.tests",
 ]
 
 MIDDLEWARE = [
