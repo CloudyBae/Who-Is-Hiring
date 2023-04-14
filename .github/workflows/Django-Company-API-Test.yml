@@ -21,8 +21,8 @@ jobs:
 
     - name: Set environment variables
       run: |
-        echo 'export PYTHONPATH=$PYTHONPATH:$PYTHONPATH/api/whoishiring' >> $GITHUB_ENV
-        echo 'export DJANGO_SETTINGS_MODULE=whoishiring.settings' >> $GITHUB_ENV
+        echo 'export PYTHONPATH=$PYTHONPATH:$PYTHONPATH/api/whoishiring'
+        echo 'export DJANGO_SETTINGS_MODULE=whoishiring.settings' 
 
     - name: Run tests
       working-directory: ./api/whoishiring
