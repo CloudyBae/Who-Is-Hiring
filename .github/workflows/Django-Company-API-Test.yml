@@ -10,6 +10,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}/api/whoishiring
+      DJANGO_SETTINGS_MODULE: whoishiring.settings
     steps:
       - uses: actions/checkout@v2
 
@@ -22,8 +25,7 @@ jobs:
         run: |
           pip install flake8
           pip install -r requirements.txt
-          export PYTHONPATH=$PYTHONPATH:$PWD/api/whoishiring
-          export DJANGO_SETTINGS_MODULE=whoishiring.settings
+
       - name: Test with pytest
         run: |
           pytest --collect-only
