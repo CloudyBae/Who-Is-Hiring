@@ -22,10 +22,9 @@ jobs:
     - name: Set environment variables
       run: |
         echo "::set-env name=PYTHONPATH=:api/whoishiring"
-        echo "::set-env name=DJANGO_SETTINGS_MODULE=:whoishiring.settings"
         
-
     - name: Run tests
       run: |
         pip install pytest
+        export DJANGO_SETTINGS_MODULE=whoishiring.settings
         pytest ./api/whoishiring/companies/tests/test_api.py -s -v --durations=0
