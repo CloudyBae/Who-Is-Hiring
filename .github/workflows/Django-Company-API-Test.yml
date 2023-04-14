@@ -20,10 +20,13 @@ jobs:
         pip install -r requirements.txt
 
     - name: Set environment variables
+      env:
+        SECRET_KEY: ${{ secrets.DJANGO_SETTINGS_MODULE }}
       run: |
-        echo 'export PYTHONPATH=$PYTHONPATH:$PYTHONPATH/api/whoishiring'
+        echo "::set-env name=PYTHONPATH=:api/whoishiring"
         echo 'export DJANGO_SETTINGS_MODULE=whoishiring.settings' 
 
     - name: Run tests
-      working-directory: ./api/whoishiring
-      run: pytest -vv
+      run: |
+        pip install pytest
+        python pytest test_api.py -s -v --durations=0
