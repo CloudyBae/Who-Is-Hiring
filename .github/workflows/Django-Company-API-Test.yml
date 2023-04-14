@@ -15,12 +15,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Python 3.8 and pipenv
+      - name: Set up Python 3.8.5 and pipenv
         uses: actions/setup-python@v2
         with:
-          python-version: "3.8"
-        run: |
-          pip install pipenv --upgrade
+          python-version: "3.8.5"
+      - run: pip install pipenv --upgrade
 
       - name: Install dependencies
         run: |
@@ -29,8 +28,10 @@ jobs:
 
       - name: Set environment variables
         env:
+          PYTHONPATH: ${{ env.PYTHONPATH }}:${{ env.PYTHONPATH }}/api/whoishiring
           DJANGO_SETTINGS_MODULE: whoishiring.settings
         run: |
+          echo "PYTHONPATH=$PYTHONPATH" >> $GITHUB_ENV
           echo "DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE" >> $GITHUB_ENV
 
       - name: Run tests
