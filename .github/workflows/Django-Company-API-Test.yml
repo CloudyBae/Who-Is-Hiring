@@ -19,16 +19,16 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.8"
-      - run: pip install pipenv --upgrade
 
       - name: Install dependencies
         run: |
-          pipenv install
+          pip install pipenv
+          pipenv install --deploy --system
           pip install pytest pytest-cov
 
       - name: Set environment variables
         env:
-          PYTHONPATH: ${{ env.PYTHONPATH }}:${{ env.PYTHONPATH }}/api/whoishiring
+          PYTHONPATH: ${{ env.PYTHONPATH }}:${{ env.GITHUB_WORKSPACE }}/api/whoishiring
           DJANGO_SETTINGS_MODULE: whoishiring.settings
         run: |
           echo "PYTHONPATH=$PYTHONPATH" >> $GITHUB_ENV
@@ -36,4 +36,5 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest api/coronavstech -s -v --durations=0 --cov=. -m "not skip_in_ci"
+          pytest api/coronavstech -s -v --cov=. --cov-report=xml --junitxml=junit/test-results.xml -m "not skip_in_ci"
+        working-directory: ${{ env.GITHUB_WORKSPACE }}/api/whoishiring
