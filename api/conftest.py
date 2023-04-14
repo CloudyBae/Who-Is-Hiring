@@ -2,7 +2,7 @@ from typing import List
 
 import pytest
 
-from api.coronavstech.companies.models import Company
+from api.whoishiring.companies.models import Company
 
 
 @pytest.fixture
