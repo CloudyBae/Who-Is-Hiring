@@ -22,7 +22,7 @@ jobs:
         run: |
           pip install flake8
           pip install -r requirements.txt
-          export PYTHONPATH=$PYTHONPATH:$PYTHONPATH/api/whoishiring
+          export PYTHONPATH=$PYTHONPATH:$PWD/api/whoishiring
           export DJANGO_SETTINGS_MODULE="whoishiring.settings"
       - name: Test with pytest
         run: |
