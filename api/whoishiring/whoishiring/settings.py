@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "api.whoishiring.companies",
-    "api.whoishiring.whoishiring"
+    "api.whoishiring.whoishiring",
+    "api.whoishiring.companies.models"
 ]
 
 MIDDLEWARE = [
