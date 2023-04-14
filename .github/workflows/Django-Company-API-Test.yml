@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pipenv install --system
+          pipenv install
           pip install pytest pytest-cov
 
       - name: Set environment variables
