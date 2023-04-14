@@ -15,10 +15,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Python 3.8.5 and pipenv
+      - name: Set up Python 3.8 and pipenv
         uses: actions/setup-python@v2
         with:
-          python-version: "3.8.5"
+          python-version: "3.8"
       - run: pip install pipenv --upgrade
 
       - name: Install dependencies
