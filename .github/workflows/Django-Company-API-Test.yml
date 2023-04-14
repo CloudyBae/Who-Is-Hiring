@@ -10,31 +10,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: ${{ github.workspace }}/api/whoishiring
-      DJANGO_SETTINGS_MODULE: whoishiring.settings
     steps:
       - uses: actions/checkout@v2
-
       - name: Set up Python 3.11.0 and create virtual environment
         uses: actions/setup-python@v2
         with:
           python-version: "3.11.0"
-
       - name: Create virtual environment
         run: python -m venv venv
-
       - name: Activate virtual environment
         run: source venv/bin/activate
-
       - name: Install dependencies
-        run: |
-          pip install -U pip
-          pip install -U setuptools wheel
-          pip install flake8
-          pip install -r requirements.txt
-
+        run: pip install -r requirements.txt
       - name: Test with pytest
-        run: |
-          pytest --collect-only
-          flake8 .
+        run: pytest
