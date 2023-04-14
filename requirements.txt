@@ -1,2 +1,3 @@
 django
--U pytest pytest-django
+pytest
+pytest-django
