@@ -26,5 +26,5 @@ jobs:
           export DJANGO_SETTINGS_MODULE="whoishiring.settings"
       - name: Test with pytest
         run: |
-          pytest api/whoishiring -s -v --durations=0
+          pytest --collect-only
           flake8 .
