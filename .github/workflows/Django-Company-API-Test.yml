@@ -1,4 +1,4 @@
-name: CI
+name: Django Company API Test
 on:
   push:
     branches:
@@ -8,13 +8,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    
+    - name: Set up Python 3.8 and pipenv
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.8"
+    
     - name: Install dependencies
       run: |
-        sudo apt-get update && sudo apt-get -y install python3-pip
-        pip install pipenv
-        cd api/
-        pipenv install --dev
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Set environment variables
+      env:
+        PYTHONPATH: PYTHONPATH=$PYTHONPATH:$PYTHONPATH/api/whoishiring
+        DJANGO_SETTINGS_MODULE: whoishiring.settings
+
     - name: Run tests
-      run: |
-        cd api/
-        pipenv run pytest
+      working-directory: ./api/whoishiring
+      run: pytest -vv
