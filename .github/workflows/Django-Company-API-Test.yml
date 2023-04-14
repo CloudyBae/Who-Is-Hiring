@@ -35,5 +35,5 @@ jobs:
 
       - name: Test with pytest
         run: |
-          pytest --collect-only
-          flake8 .
+          python -m pytest --collect-only
+          python -m flake8 .
