@@ -23,6 +23,8 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pip install -U pip
+          pip install -U setuptools wheel
           pip install flake8
           pip install -r requirements.txt
 
