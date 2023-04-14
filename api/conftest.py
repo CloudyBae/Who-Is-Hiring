@@ -2,7 +2,7 @@ from typing import List
 
 import pytest
 
-from whoishiring.companies.models import Company
+from .whoishiring.companies.models import Company
 
 
 @pytest.fixture
