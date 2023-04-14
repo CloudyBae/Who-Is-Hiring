@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "api.whoishiring.companies.myAppNameConfig",
-    "api.whoishiring.companies.tests.myAppNameConfig",
+    "api.whoishiring.companies",
 ]
 
 MIDDLEWARE = [
