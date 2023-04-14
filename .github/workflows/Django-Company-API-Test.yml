@@ -1,4 +1,4 @@
-name: Django API Tests
+name: Django Company API tests
 
 on:
   push:
@@ -9,31 +9,32 @@ on:
       - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Set up Python 3.11.0 and create virtual environment
+      - name: Set up Python 3.8.5 and pipenv
         uses: actions/setup-python@v2
         with:
-          python-version: "3.11.0"
-
-      - name: Create and activate virtual environment
+          python-version: "3.8.5"
         run: |
-          python -m venv venv
-          source venv/bin/activate
+          pip install pipenv --upgrade
 
       - name: Install dependencies
         run: |
-          pip install -U pip setuptools wheel
-          pip install flake8
-          pip install -r requirements.txt
+          pipenv install --system
+          pip install pytest pytest-cov
 
-      - name: Set up Django environment variable
-        run: echo "DJANGO_SETTINGS_MODULE=whoishiring.settings" >> $GITHUB_ENV
-
-      - name: Test with pytest
+      - name: Set environment variables
+        env:
+          PYTHONPATH: ${{ env.PYTHONPATH }}:${{ env.PYTHONPATH }}/api/whoishiring
+          DJANGO_SETTINGS_MODULE: whoishiring.settings
         run: |
-          python -m pytest --collect-only
-          python -m flake8 .
+          echo "PYTHONPATH=$PYTHONPATH" >> $GITHUB_ENV
+          echo "DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE" >> $GITHUB_ENV
+
+      - name: Run tests
+        run: |
+          pytest api/coronavstech -s -v --durations=0 --cov=. -m "not skip_in_ci"
