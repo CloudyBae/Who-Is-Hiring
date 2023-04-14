@@ -19,17 +19,16 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.8.5"
-        run: |
-          pip install pipenv --upgrade
 
       - name: Install dependencies
         run: |
+          pip install pipenv --upgrade
           pipenv install --system
           pip install pytest pytest-cov
 
       - name: Set environment variables
         env:
-          PYTHONPATH: ${{ github.workspace }}/api/whoishiring
+          PYTHONPATH: ${{ env.PYTHONPATH }}:${{ env.PYTHONPATH }}/api/whoishiring
           DJANGO_SETTINGS_MODULE: whoishiring.settings
         run: |
           echo "PYTHONPATH=$PYTHONPATH" >> $GITHUB_ENV
