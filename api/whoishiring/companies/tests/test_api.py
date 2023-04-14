@@ -1,7 +1,7 @@
 import json
 import pytest
 from django.urls import reverse
-from ..models import Company
+from api.whoishiring.companies.models import Company
 
 companies_url = reverse("companies-list")
 pytestmark = pytest.mark.django_db
