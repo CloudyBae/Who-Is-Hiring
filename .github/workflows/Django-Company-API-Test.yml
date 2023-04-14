@@ -1,40 +1,20 @@
-name: Django Company API tests
-
+name: CI
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Python 3.8 and pipenv
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.8"
-
-      - name: Install dependencies
-        run: |
-          pip install pipenv
-          pipenv install --deploy --system
-          pip install pytest pytest-cov
-
-      - name: Set environment variables
-        env:
-          PYTHONPATH: ${{ env.PYTHONPATH }}:${{ env.GITHUB_WORKSPACE }}/api/whoishiring
-          DJANGO_SETTINGS_MODULE: whoishiring.settings
-        run: |
-          echo "PYTHONPATH=$PYTHONPATH" >> $GITHUB_ENV
-          echo "DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE" >> $GITHUB_ENV
-
-      - name: Run tests
-        run: |
-          pytest api/coronavstech -s -v --cov=. --cov-report=xml --junitxml=junit/test-results.xml -m "not skip_in_ci"
-        working-directory: ${{ env.GITHUB_WORKSPACE }}/api/whoishiring
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        sudo apt-get update && sudo apt-get -y install python3-pip
+        pip install pipenv
+        cd api/
+        pipenv install --dev
+    - name: Run tests
+      run: |
+        cd api/
+        pipenv run pytest
